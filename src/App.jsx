@@ -61,10 +61,7 @@ const App = () => {
 
   return (
     <div>
-      {console.log(
-        `employers: ${employmentObj.coopTable.coopInformation[0].employer}`
-      )}
-      <div className="flex justify-between bg-black text-white">
+      <div className="hidden sm:flex justify-between bg-black text-white">
         <div className="w-full py-2 px-10 flex font-semibold uppercase gap-3 items-center text-sm">
           <button>Iste 340</button>
           <button>Junheng Zheng</button>
@@ -74,17 +71,17 @@ const App = () => {
           <button>iSchool Remake</button>
         </div>
       </div>
-      <div className="border-b border-gray-200 flex z-200 justify-between py-4 px-10 bg-white text-black items-center">
-        <div className="flex w-full gap-2">
+      <div className="border-b border-gray-200 flex-col sm:flex-row flex z-200 justify-between sm:py-4 sm:px-10 bg-white text-black items-center">
+        <div className="flex justify-center sm:justify-start p-3 border-b border-gray-300 sm:border-0 sm:p-0 w-full gap-2">
           <img
             className="w-[15%] object-contain"
             src="https://www.rit.edu/brandportal/sites/rit.edu.brandportal/files/inline-images/new_RIT_logo1_RGB_0.png"
           />
-          <p className="m-0 px-2 border-l leading-none font-bold w-[40%] border-black ">
+          <p className="hidden sm:block m-0 px-2 border-l leading-none font-bold w-[40%] border-black ">
             Rochester Institute of Technology
           </p>
         </div>
-        <div className="justify-center w-full items-center flex flex-col gap-2">
+        <div className="hidden justify-center w-full items-center sm:flex flex-col gap-2">
           <p className="m-0 font-bold leading-none text-md">
             Golisano College of
           </p>
@@ -92,26 +89,28 @@ const App = () => {
             Computing and Information Sciences
           </p>
         </div>
-        <div className="m-0 text-sm font-bold flex gap-4 w-full items-center justify-end">
+        <div className="m-0 text-sm font-bold hidden sm:flex gap-4 w-full items-center justify-end">
           <button>Github</button>
           <button>LinkedIn</button>
         </div>
       </div>
       <div className="">
-        <div className="w-full h-fit py-10 flex items-center text-white">
-          <div className="bg-orange-500 px-50 w-fit h-[275px] flex gap-1 flex-col justify-center items-start">
-            <p className="text-[40px] font-normal leading-none m-0">
-              School of
-            </p>
-            <p className="m-0 font-bold text-[45px] leading-none">
-              Information
-            </p>
+        <div className="w-full h-fit py-3 pb-0 sm:!py-10 flex-col-reverse flex sm:flex-row items-center text-white">
+          <div className="w-full flex justify-center sm:block sm:w-fit">
+            <div className="bg-orange-500 px-3 sm:!px-50 w-[90%] sm:w-fit -translate-y-[20px] sm:translate-y-[0px] h-[80px] sm:h-[275px] flex gap-1 flex-col justify-center items-start">
+              <p className="text-lg sm:text-[40px] font-normal leading-none m-0">
+                School of
+              </p>
+              <p className="text-xl m-0 font-bold sm:text-[45px] leading-none">
+                Information
+              </p>
+            </div>
           </div>
           <img
-            className="w-[45%]"
+            className="w-full sm:w-[45%]"
             src="https://www.rit.edu/computing/sites/rit.edu.computing/files/images/paragraph/banner-item-2/schoolofinfo.jpg"
           />
-          <div className="bg-orange-500 flex-grow h-[275px] py-20"></div>
+          <div className="bg-orange-500 hidden sm:flex-grow sm:flex h-[275px] py-20"></div>
         </div>
         {/* <div className="flex">
           <div className="w-full flex flex-col justify-center p-8">
@@ -134,23 +133,23 @@ const App = () => {
             />
           </div>
         </div> */}
-        <p className="px-35 text-sm text-gray-600 font-light margin-0">
+        <p className="hidden sm:block px-35 text-sm text-gray-600 font-light margin-0">
           <strong className="text-black">
             RIT / Golisano College of Computing and Information Sciences /
             Academics / Departments and Schools /
           </strong>
           <em> </em>School of Information
         </p>
-        <div className="relative py-10 gap-30 flex w-full px-35">
-          <div className="flex-start w-fit flex flex-col gap-4 items-start text-[21px] font-semibold text-gray-600 sticky top-0">
+        <div className="relative gap-30 flex w-full px-3 py-3 sm:!py-10 sm:!px-35">
+          <div className="flex-start w-fit hidden sm:flex flex-col gap-4 items-start text-[21px] font-semibold text-gray-600 sticky top-0">
             <button className="hover:text-orange-500">About</button>
             <button className="hover:text-orange-500">Degrees</button>
             <button className="hover:text-orange-500">Minors</button>
             <button className="hover:text-orange-500">Employment</button>
             <button className="hover:text-orange-500">People</button>
           </div>
-          <div>
-            <div className="w-full gap-7 flex flex-col justify-center">
+          <div className="w-full">
+            <div className="w-full gap-4 sm:!gap-7 flex flex-col justify-center">
               <h1>About</h1>
               <h2 className="px-2 border-l-3 border-orange-500 m-0 text-[20px]">
                 {aboutObj.title}
