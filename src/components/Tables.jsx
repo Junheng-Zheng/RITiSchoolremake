@@ -3,16 +3,19 @@ import Tabs from "react-bootstrap/Tabs";
 import { useState } from "react";
 import { useEffect } from "react";
 import PeopleGroups from "./peopleGroup.jsx";
+import getData from "../util/GetData.js";
 
-const PeopleTabs = ({ data }) => {
-  const [isLoading, setIsLoading] = useState(false);
+function Tables() {
+  const [loading, setLoading] = useState(false);
   const [people, setPeople] = useState();
 
   useEffect(() => {
-    setPeople(data);
-    console.log("set!");
-    setIsLoading(true);
-  }, [data]);
+    getData("people/").then((json) => {
+      console.log("new json: ", json);
+      setPeople(json);
+      setLoading(true);
+    });
+  }, []);
 
   return (
     <Tabs
@@ -21,15 +24,13 @@ const PeopleTabs = ({ data }) => {
       className="mb-3"
     >
       <Tab eventKey="faculty" title="Faculty">
-        {isLoading && (
-          <PeopleGroups title="faculty" pepGroup={people.faculty} />
-        )}
+        {loading && <PeopleGroups title="faculty" pepGroup={people.faculty} />}
       </Tab>
       <Tab eventKey="staff" title="Staff">
-        {isLoading && <PeopleGroups title="staff" pepGroup={people.staff} />}
+        {loading && <PeopleGroups title="staff" pepGroup={people.staff} />}
       </Tab>
     </Tabs>
   );
-};
+}
 
-export default PeopleTabs;
+export default Tables;

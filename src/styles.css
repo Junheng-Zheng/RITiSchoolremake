@@ -1,2 +1,12 @@
 /* src/styles.css */
 @import "tailwindcss";
+
+body {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Reset Bootstrap's default margin and padding */
+body * {
+  margin: 0;
+}
