@@ -26,24 +26,27 @@ const App = () => {
   const [people, setPeople] = useState();
   const [loadingBar, SetLoadingBar] = useState(0);
   useEffect(() => {
-    getData("about/").then((json) => {
-      console.log("worked", json);
-      //load the data into the object
-      setAboutObj(json);
-      //flip the bit on loaded
-    });
-    getData("people/").then((json) => {
-      console.log("peoplejson: ", json);
-      setPeople(json);
-      SetLoadingBar(100);
-    });
-    getData("employment/").then((json) => {
-      console.log("employmentworked", json);
-      //load the data into the object
-      setEmploymentObj(json);
-      //flip the bit on loaded
-      setLoadAbout(true);
-    });
+    const Fetch = async () => {
+      getData("about/").then((json) => {
+        console.log("worked", json);
+        //load the data into the object
+        setAboutObj(json);
+        //flip the bit on loaded
+      });
+      getData("people/").then((json) => {
+        console.log("peoplejson: ", json);
+        setPeople(json);
+        SetLoadingBar(100);
+      });
+      getData("employment/").then((json) => {
+        console.log("employmentworked", json);
+        //load the data into the object
+        setEmploymentObj(json);
+        //flip the bit on loaded
+        setLoadAbout(true);
+      });
+    };
+    Fetch();
   }, []);
   if (!loadAbout)
     return (

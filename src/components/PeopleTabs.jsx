@@ -9,9 +9,14 @@ const PeopleTabs = ({ data }) => {
   const [people, setPeople] = useState();
 
   useEffect(() => {
-    setPeople(data);
-    console.log("set!");
-    setIsLoading(true);
+    const Fetch = async () => {
+      if (data) {
+        setPeople(data);
+        console.log("set!");
+        setIsLoading(true);
+      }
+    };
+    Fetch();
   }, [data]);
 
   return (
