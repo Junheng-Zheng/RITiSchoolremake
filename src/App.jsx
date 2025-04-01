@@ -3,19 +3,25 @@
 //React.useState()
 import { useState, useEffect } from "react";
 //import components
-import BootAcc from "./components/BootAcc.jsx";
-import PeopleTabs from "./components/PeopleTabs.jsx";
-import Undergraduate from "./components/graduate.jsx";
-import Graduate from "./components/graduate.jsx";
-import Tables from "./components/Tables.jsx";
-import Gridtable from "./components/Gridtable.jsx";
-import "./custom.scss"; // Adjust the path if necessary
-import "./styles.css";
-import "bootstrap/dist/css/bootstrap.min.css"; // Bootstrap CSS
-import "bootstrap/dist/js/bootstrap.bundle.min.js"; // Bootstrap JavaScript (includes Popper.js)
+
+//navigation
+import Navbar from "./components/navigation/Navbar.jsx";
+import Sidenav from "./components/navigation/Sidenav.jsx";
+import Footer from "./components/navigation/Footer.jsx";
+
+//website sections
+import Hero from "./components/Hero.jsx";
+import About from "./components/About.jsx";
+import Degrees from "./components/Degrees.jsx";
+import Minors from "./components/Minors.jsx";
+import Employment from "./components/Employment.jsx";
+import People from "./components/People.jsx";
+
+// Bootstrap CSS
+import "bootstrap/dist/css/bootstrap.min.css";
 
 //get my utils
-import getData from "./util/GetData.js"; // .js not required, just nice for human readability
+import getData from "./util/GetData.js";
 
 const App = () => {
   //set up my state vars
@@ -25,28 +31,29 @@ const App = () => {
   const [employmentObj, setEmploymentObj] = useState();
   const [people, setPeople] = useState();
   const [loadingBar, SetLoadingBar] = useState(0);
+
   useEffect(() => {
-    const Fetch = async () => {
-      getData("about/").then((json) => {
-        console.log("worked", json);
-        //load the data into the object
-        setAboutObj(json);
-        //flip the bit on loaded
-      });
-      getData("people/").then((json) => {
-        console.log("peoplejson: ", json);
-        setPeople(json);
+    const fetchData = async () => {
+      try {
+        const about = await getData("about/");
+        console.log("About:", about);
+        setAboutObj(about);
+        SetLoadingBar(50);
+        const people = await getData("people/");
+        console.log("People:", people);
+        setPeople(people);
         SetLoadingBar(100);
-      });
-      getData("employment/").then((json) => {
-        console.log("employmentworked", json);
-        //load the data into the object
-        setEmploymentObj(json);
-        //flip the bit on loaded
+        const employment = await getData("employment/");
+        console.log("Employment:", employment);
+        setEmploymentObj(employment);
+
         setLoadAbout(true);
-      });
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
     };
-    Fetch();
+
+    fetchData();
   }, []);
   if (!loadAbout)
     return (
@@ -54,7 +61,7 @@ const App = () => {
         <div className="w-full flex flex-col items-center justify-center">
           <div className="flex h-[20px] border border-gray-400 rounded-md w-[70%]">
             <div
-              className="transition-all duration-200 h-full bg-orange-500"
+              className="transition-all duration-1000 h-full bg-orange-500"
               style={{ paddingLeft: `${loadingBar}%` }}
             ></div>
           </div>
@@ -63,265 +70,25 @@ const App = () => {
     );
 
   return (
-    <div>
-      <div className="hidden sm:flex justify-between bg-black text-white">
-        <div className="w-full py-2 px-10 flex font-semibold uppercase gap-3 items-center text-sm">
-          <button>Iste 340</button>
-          <button>Junheng Zheng</button>
-          <button>Project 2</button>
-        </div>
-        <div className=" bg-orange-500 px-10 py-2 items-center text-nowrap font-semibold flex justify-end text-sm uppercase">
-          <button>iSchool Remake</button>
-        </div>
+    <>
+      <Navbar />
+      <Hero />
+      <div className="relative h-fit gap-30 flex w-full px-3 py-3 sm:!py-10 sm:!px-35">
+        <Sidenav />
+        <section className="w-full gap-4 sm:!gap-7 flex flex-col justify-center">
+          <About aboutObj={aboutObj} />
+          <hr />
+          <Degrees />
+          <hr />
+          <Minors />
+          <hr />
+          <Employment employmentObj={employmentObj} />
+          <hr />
+          <People peopleObj={people} />
+        </section>
       </div>
-      <div className="border-b border-gray-200 flex-col sm:flex-row flex z-200 justify-between sm:py-4 sm:px-10 bg-white text-black items-center">
-        <div className="flex justify-center sm:justify-start p-3 border-b border-gray-300 sm:border-0 sm:p-0 w-full gap-2">
-          <img
-            className="w-[15%] object-contain"
-            src="https://www.rit.edu/brandportal/sites/rit.edu.brandportal/files/inline-images/new_RIT_logo1_RGB_0.png"
-          />
-          <p className="hidden sm:block m-0 px-2 border-l leading-none font-bold w-[40%] border-black ">
-            Rochester Institute of Technology
-          </p>
-        </div>
-        <div className="hidden justify-center w-full items-center sm:flex flex-col gap-2">
-          <p className="m-0 font-bold leading-none text-md">
-            Golisano College of
-          </p>
-          <p className="m-0 font-bold text-nowrap leading-none text-[27px]">
-            Computing and Information Sciences
-          </p>
-        </div>
-        <div className="m-0 text-sm font-bold hidden sm:flex gap-4 w-full items-center justify-end">
-          <button>Github</button>
-          <button>LinkedIn</button>
-        </div>
-      </div>
-      <div className="">
-        <div className="w-full h-fit py-3 pb-0 sm:!py-10 flex-col-reverse flex sm:flex-row items-center text-white">
-          <div className="w-full flex justify-center sm:block sm:w-fit">
-            <div className="bg-orange-500 px-3 sm:!px-50 w-[90%] sm:w-fit -translate-y-[20px] sm:translate-y-[0px] h-[80px] sm:h-[275px] flex gap-1 flex-col justify-center items-start">
-              <p className="text-lg sm:text-[40px] font-normal leading-none m-0">
-                School of
-              </p>
-              <p className="text-xl m-0 font-bold sm:text-[45px] leading-none">
-                Information
-              </p>
-            </div>
-          </div>
-          <img
-            className="w-full sm:w-[45%]"
-            src="https://www.rit.edu/computing/sites/rit.edu.computing/files/images/paragraph/banner-item-2/schoolofinfo.jpg"
-          />
-          <div className="bg-orange-500 hidden sm:flex-grow sm:flex h-[275px] py-20"></div>
-        </div>
-        {/* <div className="flex">
-          <div className="w-full flex flex-col justify-center p-8">
-            <h1 className="text-[50px] uppercase font-bold leading-none">
-              {aboutObj.title}
-            </h1>
-            <h6>{aboutObj.description}</h6>
-            <div className="text-sm text-gray-600">"{aboutObj.quote}"</div>
-            <h5 className="w-full text-right text-gray-600 text-sm">
-              -{aboutObj.quoteAuthor}
-            </h5>
-            <div className="py-3 px-8 text-white bg-orange-500 w-fit rounded-[20px] overflow-hidden">
-              View Degrees
-            </div>
-          </div>
-          <div className="flex-grow">
-            <img
-              className="h-full"
-              src="https://www.rit.edu/sites/rit.edu/files/styles/full/https/cdn.rit.edu/images/news/2020-09/aerial_drone_09-web.jpg?itok=LbgHFYjL"
-            />
-          </div>
-        </div> */}
-        <p className="hidden sm:block px-35 text-sm text-gray-600 font-light margin-0">
-          <strong className="text-black">
-            RIT / Golisano College of Computing and Information Sciences /
-            Academics / Departments and Schools /
-          </strong>
-          <em> </em>School of Information
-        </p>
-        <div className="relative gap-30 flex w-full px-3 py-3 sm:!py-10 sm:!px-35">
-          <div className="flex-start w-fit hidden sm:flex flex-col gap-4 items-start text-[21px] font-semibold text-gray-600 sticky top-0">
-            <button className="hover:text-orange-500">About</button>
-            <button className="hover:text-orange-500">Degrees</button>
-            <button className="hover:text-orange-500">Minors</button>
-            <button className="hover:text-orange-500">Employment</button>
-            <button className="hover:text-orange-500">People</button>
-          </div>
-          <div className="w-full">
-            <div className="w-full gap-4 sm:!gap-7 flex flex-col justify-center">
-              <h1>About</h1>
-              <h2 className="px-2 border-l-3 border-orange-500 m-0 text-[20px]">
-                {aboutObj.title}
-              </h2>
-              <p className="font-light m-0">{aboutObj.description}</p>
-              <p className="m-0 text-sm text-gray-600">
-                "{aboutObj.quote}" -{aboutObj.quoteAuthor}
-              </p>
-              <h1>Degrees</h1>
-              <h2 className="px-2 border-l-3 border-orange-500 m-0 text-[20px]">
-                Undergraduate Programs
-              </h2>
-              <p className="m-0 font-light">
-                Home to the college’s Bachelor of Science degrees in computing
-                and information technologies, human-centered computing, and web
-                and mobile computing, the iSchool comprises the “full stack”
-                computing knowledge that prepares professionals working on both
-                the front- and back-end of the user experience.
-              </p>
-              <Undergraduate />
-              <h2 className="px-2 border-l-3 border-orange-500 m-0 text-[20px]">
-                Graduate Programs
-              </h2>
-              <p className="m-0 font-light">
-                A Master of Science Degree from the School of Information
-                provides an opportunity for in-depth study to prepare for
-                today’s high-demand computing careers. Big data is not just high
-                transaction volumes; it is also data in various formats, with
-                high velocity change, and increasing complexity and information
-                delivery must be immediate and on demand.
-              </p>
-              <Graduate />
-              <hr></hr>
-              <h1>Minors</h1>
-              <h2 className="px-2 border-l-3 border-orange-500 m-0 text-[20px]">
-                Undergraduate Minors
-              </h2>
-              <Graduate />
-              <hr></hr>
-              <h1>Employment</h1>
-              <h2 className="px-2 border-l-3 border-orange-500 text-[21px] m-0 font-bold">
-                Academic excellence equals career performance
-              </h2>
-              <p className="text-gray-600 font-light m-0">
-                iSchool graduates are heavily sought after by the professional
-                tech industry. This is by design. We’ve been building
-                relationships with employers for over 2 decades by continuously
-                producing high caliber graduates. RIT’s reputation extends
-                beyond Rochester, with 95% of our students landing a job within
-                the first 6 months after graduation. It’s not uncommon for
-                students to have offers before they even leave RIT.
-              </p>
-              <h2 className="px-2 border-l-3 border-orange-500 text-[21px] m-0 font-bold">
-                Cooperative Education
-              </h2>
-              <p className="text-gray-600 font-light m-0">
-                Cooperative education experiences, or co-ops, are an opportunity
-                for students to build on their classroom skills in a real world
-                environment. Co-ops are more than just an internship. Students
-                get paid to work alongside industry professionals in leading
-                tech companies, learning on the job and assisting with actual
-                company projects. All undergraduate students are required to
-                take 2 co-ops prior to graduation. Students typically take a
-                co-op during their sophomore or junior year. For more
-                information about co-ops, including course prerequisites and how
-                to enroll in a co-op, please refer to our resources page.
-              </p>
-              <div className="flex justify-between items-start gap-10">
-                <div className="w-full flex flex-col gap-1">
-                  <p className="text-[32px] m-0 text-orange-500">$80,000</p>
-                  <p className="m-0 font-light text-sm">
-                    Average salary with one of our degrees (glassdoor.com)
-                  </p>
-                </div>
-                <div className="w-full flex flex-col gap-1">
-                  <p className="text-[32px] m-0 text-orange-500">36th</p>
-                  <p className="m-0 font-light text-sm">
-                    Rank among the Top 50 Best Computing Colleges in the U.S.
-                    (businessinsider.com)
-                  </p>
-                </div>
-                <div className="w-full flex flex-col gap-1">
-                  <p className="text-[32px] m-0 text-orange-500">35</p>
-                  <p className="m-0 font-light text-sm">
-                    Percent of all of the web traffic used by mobile devices in
-                    the U.S. (thenextweb.com)
-                  </p>
-                </div>
-                <div className="w-full flex flex-col gap-1">
-                  <p className="text-[32px] m-0 text-orange-500">
-                    1.11 Billion GB
-                  </p>
-                  <p className="m-0 font-light text-sm">
-                    Information in the form of internet traffic in 24 hours
-                    (mbaonline.com)
-                  </p>
-                </div>
-              </div>
-              <h2 className="px-2 border-l-3 border-orange-500 text-[21px] m-0 font-bold">
-                Careers
-              </h2>
-              <div className="flex items-center gap-3">
-                <div className="text-white px-3 py-2 bg-orange-500">
-                  <p className="m-0 text-sm">RIT Libraries</p>
-                </div>
-                <div className="text-white px-3 py-2 bg-orange-500">
-                  <p className="m-0 text-sm">Parlec Inc</p>
-                </div>
-                <div className="text-white px-3 py-2 bg-orange-500">
-                  <p className="m-0 text-sm">TigerSafe</p>
-                </div>
-                <div className="text-white px-3 py-2 bg-orange-500">
-                  <p className="m-0 text-sm">CommVault</p>
-                </div>
-                <div className="text-white px-3 py-2 bg-orange-500">
-                  <p className="m-0 text-sm">Liberty Pump</p>
-                </div>
-                <div className="text-white px-3 py-2 bg-orange-500">
-                  <p className="m-0 text-sm">Alit</p>
-                </div>
-              </div>
-              <h2 className="px-2 border-l-3 border-orange-500 text-[21px] m-0 font-bold">
-                Employers
-              </h2>
-              <div className="flex items-center gap-3">
-                <div className="text-white px-3 py-2 bg-orange-500">
-                  <p className="m-0 text-sm">RIT Libraries</p>
-                </div>
-                <div className="text-white px-3 py-2 bg-orange-500">
-                  <p className="m-0 text-sm">Parlec Inc</p>
-                </div>
-                <div className="text-white px-3 py-2 bg-orange-500">
-                  <p className="m-0 text-sm">TigerSafe</p>
-                </div>
-                <div className="text-white px-3 py-2 bg-orange-500">
-                  <p className="m-0 text-sm">CommVault</p>
-                </div>
-                <div className="text-white px-3 py-2 bg-orange-500">
-                  <p className="m-0 text-sm">Liberty Pump</p>
-                </div>
-                <div className="text-white px-3 py-2 bg-orange-500">
-                  <p className="m-0 text-sm">Alit</p>
-                </div>
-              </div>
-              {/* <Tables /> */}
-              {/* <BootAcc /> */}
-              <h2 className="px-2 border-l-3 border-orange-500 text-[21px] m-0 font-bold">
-                See the Statistics
-              </h2>
-              <Gridtable data={employmentObj} />
-              <h1>People</h1>
-              <PeopleTabs data={people} />
-            </div>
-          </div>
-        </div>
-        <footer className="flex flex-col w-full bg-black text-white">
-          <div className="flex flex-col gap-2 w-full items-center justify-center p-3 border-b border-gray-700">
-            <p className="m-0">RIT iSchool</p>
-            <p className="m-0 text-sm">Created by Junheng Zheng</p>
-          </div>
-          <div className="p-3 text-center">
-            <p className="m-0 text-sm">
-              Copyright © Rochester Institute of Technology. All Rights
-              Reserved.
-            </p>
-          </div>
-        </footer>
-      </div>
-    </div>
+      <Footer />
+    </>
   );
 };
 

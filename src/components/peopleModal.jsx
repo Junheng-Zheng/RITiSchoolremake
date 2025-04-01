@@ -9,18 +9,16 @@ const style = {
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
-  width: 400,
-  bgcolor: "background.paper",
-  border: "2px solid #000",
+  bgcolor: "white",
   boxShadow: 24,
-  p: 4,
+  width: "400px",
 };
 
 export default function PeopleModal({ prop }) {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-
+  console.log("PROP INFO", prop);
   return (
     <div>
       <p
@@ -35,13 +33,26 @@ export default function PeopleModal({ prop }) {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <Box sx={style}>
-          <Typography id="modal-modal-title" variant="h6" component="h2">
-            <p>{prop.name}</p>
-          </Typography>
-          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-          </Typography>
+        <Box
+          className="rounded-lg overflow-hidden m-0 p-0 flex w-fullitems-center"
+          sx={style}
+        >
+          <div className="!bg-orange-500 flex items-center justify-center">
+            <img
+              className="w-[80px] border-4 border-white translate-x-1/2 h-[80px] object-cover rounded-full"
+              src={prop.imagePath}
+            />
+          </div>
+          <div className="p-2 translate-x-[40px] flex-grow flex flex-col gap-0">
+            <p className="m-0 text-[21px] font-semibold uppercase">
+              {prop.name}
+            </p>
+            <p className="m-0 text-[16px]">{prop.title}</p>
+            <hr className="my-2"></hr>
+            <p className="m-0 text-gray-700 text-[14px]">{prop.office}</p>
+            <p className="m-0 text-gray-700 text-[14px]">{prop.phone}</p>
+            <p className="m-0 text-gray-700 text-[14px]">{prop.website}</p>
+          </div>
         </Box>
       </Modal>
     </div>
