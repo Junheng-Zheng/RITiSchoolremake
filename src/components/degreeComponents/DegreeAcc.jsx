@@ -3,8 +3,6 @@ import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import AccordianCustom from "../accordians/Accordiancustom";
 
 function DegreeAcc({ degreeObj }) {
-  console.log("degreeObj", degreeObj);
-  console.log(degreeObj[0].concentrations[0]);
   return (
     <div>
       {degreeObj?.map((p, index) => (

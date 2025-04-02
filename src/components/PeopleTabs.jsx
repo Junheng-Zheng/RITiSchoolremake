@@ -20,11 +20,7 @@ const PeopleTabs = ({ data }) => {
   }, [data]);
 
   return (
-    <Tabs
-      defaultActiveKey="faculty"
-      id="uncontrolled-tab-example"
-      className="mb-3"
-    >
+    <Tabs defaultActiveKey="faculty" id="uncontrolled-tab-example">
       <Tab eventKey="faculty" title="Faculty">
         {isLoading && (
           <PeopleGroups title="faculty" pepGroup={people.faculty} />
