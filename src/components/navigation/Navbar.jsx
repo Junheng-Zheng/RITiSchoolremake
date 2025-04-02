@@ -1,8 +1,8 @@
 import React from "react";
 
-const Navbar = () => {
+const Navbar = ({ className }) => {
   return (
-    <>
+    <div className={`${className}`}>
       <div className="hidden sticky z-500 top-0 sm:flex justify-between bg-black text-white">
         <div className="w-full py-2 px-10 flex font-semibold uppercase gap-3 items-center text-sm">
           <button>Iste 340</button>
@@ -14,7 +14,7 @@ const Navbar = () => {
         </div>
       </div>
       <div className="border-b border-gray-200 flex-col sm:flex-row flex z-200 justify-between sm:py-4 sm:px-10 bg-white text-black items-center">
-        <div className="flex justify-center sm:justify-start p-3 border-b border-gray-300 sm:border-0 sm:p-0 w-full gap-2">
+        <div className="flex justify-center sm:justify-start border-b border-gray-300 sm:border-0 sm:p-0 w-full gap-2">
           <img
             className="w-[15%] object-contain"
             src="https://www.rit.edu/brandportal/sites/rit.edu.brandportal/files/inline-images/new_RIT_logo1_RGB_0.png"
@@ -36,7 +36,7 @@ const Navbar = () => {
           <button>LinkedIn</button>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

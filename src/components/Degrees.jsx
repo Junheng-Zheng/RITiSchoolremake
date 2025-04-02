@@ -1,6 +1,6 @@
 import React from "react";
 import Graduate from "./graduate";
-import Undergraduate from "./Undergraduate";
+import DegreeAcc from "./degreeComponents/DegreeAcc";
 
 //Degrees section
 const Degrees = ({ degreeObj }) => {
@@ -17,7 +17,7 @@ const Degrees = ({ degreeObj }) => {
         that prepares professionals working on both the front- and back-end of
         the user experience.
       </p>
-      <Undergraduate />
+      <DegreeAcc degreeObj={degreeObj.undergraduate} />
       <h2 className="px-2 border-l-3 border-orange-500 m-0 text-[20px]">
         Graduate Programs
       </h2>
@@ -28,7 +28,7 @@ const Degrees = ({ degreeObj }) => {
         also data in various formats, with high velocity change, and increasing
         complexity and information delivery must be immediate and on demand.
       </p>
-      <Graduate />
+      <DegreeAcc degreeObj={degreeObj.graduate} />
     </div>
   );
 };

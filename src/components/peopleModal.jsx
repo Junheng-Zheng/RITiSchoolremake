@@ -18,7 +18,7 @@ export default function PeopleModal({ prop }) {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  console.log("PROP INFO", prop);
+  // console.log("PROP INFO", prop);
   return (
     <div>
       <p

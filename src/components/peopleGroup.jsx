@@ -19,7 +19,7 @@ const PeopleGroups = ({ title, pepGroup }) => {
       {/*how do we get all of the people to show? */}
       <div className="flex h-[400px] overflow-y-scroll border border-gray-500 rounded-lg   flex-col">
         {filteredsearch.map((p) => (
-          <div className="w-full border-b border-gray-300 p-3 h-fit py-2 flex gap-2 items-center">
+          <div className="cursor-pointer transition-all duration-150 w-full border-b border-gray-300 p-3 h-fit py-2 flex gap-2 hover:rounded-lg hover:shadow-md items-center hover:!p-5">
             <img
               className="w-[50px] h-[50px] object-cover rounded-full"
               src={p.imagePath} /*alt={p.name}*/

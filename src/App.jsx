@@ -28,6 +28,7 @@ const App = () => {
   //const [var, setVar] = useState(init);
   const [loadAbout, setLoadAbout] = useState(false);
   const [aboutObj, setAboutObj] = useState();
+  const [degreeObj, setDegreeObj] = useState();
   const [employmentObj, setEmploymentObj] = useState();
   const [people, setPeople] = useState();
   const [loadingBar, SetLoadingBar] = useState(0);
@@ -38,11 +39,14 @@ const App = () => {
         const about = await getData("about/");
         console.log("About:", about);
         setAboutObj(about);
-        SetLoadingBar(50);
+        const degrees = await getData("degrees/");
+        console.log("Degrees: ", degrees);
+        setDegreeObj(degrees);
+        SetLoadingBar(50); //sets loading bar to 50
         const people = await getData("people/");
         console.log("People:", people);
         setPeople(people);
-        SetLoadingBar(100);
+        SetLoadingBar(100); //sets loading bar to 100
         const employment = await getData("employment/");
         console.log("Employment:", employment);
         setEmploymentObj(employment);
@@ -56,10 +60,13 @@ const App = () => {
     fetchData();
   }, []);
   if (!loadAbout)
+    //loading while fetching data.
     return (
       <div className="w-full h-[100vh] flex items-center justify-center flex-col">
-        <div className="w-full flex flex-col items-center justify-center">
-          <div className="flex h-[20px] border border-gray-400 rounded-md w-[70%]">
+        <Navbar className="absolute top-0" />
+        <div className="w-[70%] flex flex-col gap-1 items-center justify-center">
+          <p className="m-0 uppercase font-bold w-full">Loading...</p>
+          <div className="flex overflow-hidden h-[20px] border border-gray-400 rounded-md w-full">
             <div
               className="transition-all duration-1000 h-full bg-orange-500"
               style={{ paddingLeft: `${loadingBar}%` }}
@@ -70,7 +77,7 @@ const App = () => {
     );
 
   return (
-    <>
+    <div>
       <Navbar />
       <Hero />
       <div className="relative h-fit gap-30 flex w-full px-3 py-3 sm:!py-10 sm:!px-35">
@@ -78,8 +85,7 @@ const App = () => {
         <section className="w-full gap-4 sm:!gap-7 flex flex-col justify-center">
           <About aboutObj={aboutObj} />
           <hr />
-          <Degrees />
-          <hr />
+          <Degrees degreeObj={degreeObj} />
           <Minors />
           <hr />
           <Employment employmentObj={employmentObj} />
@@ -88,7 +94,7 @@ const App = () => {
         </section>
       </div>
       <Footer />
-    </>
+    </div>
   );
 };
 
