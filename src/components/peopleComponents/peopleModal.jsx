@@ -1,9 +1,8 @@
 import * as React from "react";
 import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 
+//modal component
 const style = {
   position: "absolute",
   top: "50%",
@@ -18,7 +17,6 @@ export default function PeopleModal({ prop, handleOpen }) {
   const [open, setOpen] = React.useState(false);
   handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  // console.log("PROP INFO", prop);
   return (
     <div>
       <p

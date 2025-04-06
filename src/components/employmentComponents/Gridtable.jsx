@@ -4,15 +4,16 @@ import { DataGrid } from "@mui/x-data-grid";
 import Tab from "react-bootstrap/Tab";
 import Tabs from "react-bootstrap/Tabs";
 const Gridtable = (data) => {
-  const [row, setRow] = useState([]);
+  //getting the tables
+  const [row, setRow] = useState([]); //for cooptbale
   const [professionalEmploymentTable, setProfessionalEmploymentTable] =
-    useState([]);
+    useState([]); //for employment table
   const [paginationModel, setPaginationModel] = useState({
     page: 0,
     pageSize: 8,
-  });
+  }); //pagination size
 
-  console.log(data.data.employmentTable.professionalEmploymentInformation);
+  //for coop columns
   const coopcolumns = [
     { field: "employer", headerName: "Employer", flex: 1 },
     { field: "degree", headerName: "Degree", flex: 1 },
@@ -20,6 +21,7 @@ const Gridtable = (data) => {
     { field: "term", headerName: "Term", flex: 1 },
   ];
 
+  //for employment columns
   const employmentcolumns = [
     { field: "employer", headerName: "Employer", flex: 1 },
     { field: "degree", headerName: "Degree", flex: 1 },
@@ -28,6 +30,7 @@ const Gridtable = (data) => {
     { field: "startdate", headerName: "Start Date", flex: 1 },
   ];
 
+  //getting coop information
   useEffect(() => {
     const newRows = data.data.coopTable.coopInformation.map((p, index) => ({
       id: index,
@@ -39,6 +42,7 @@ const Gridtable = (data) => {
 
     setRow([...newRows]);
 
+    //getting employment information
     const professionalEmployment =
       data.data.employmentTable.professionalEmploymentInformation.map(
         (p, index) => ({
@@ -53,9 +57,8 @@ const Gridtable = (data) => {
     setProfessionalEmploymentTable([...professionalEmployment]);
   }, [data]); // Runs only when `data` changes
 
-  console.log("Row", row);
-
   return (
+    //returning table with bootstrap tabs and mui
     <Tabs
       defaultActiveKey="cooptable"
       id="uncontrolled-tab-example"
@@ -68,7 +71,7 @@ const Gridtable = (data) => {
           disableSelectionOnClick
           pagination
           paginationModel={paginationModel}
-          onPaginationModelChange={setPaginationModel} // <---- This updates pagination state
+          onPaginationModelChange={setPaginationModel}
           sx={{
             "& .MuiDataGrid-root": { backgroundColor: "#f5f5f5" },
             "& .MuiDataGrid-cell": {

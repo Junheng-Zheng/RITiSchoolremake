@@ -35,22 +35,16 @@ const App = () => {
         setAboutObj(about);
         const degrees = await getData("degrees/"); //gets the degrees data
         setDegreeObj(degrees);
-        console.log("degrees", degrees);
         const minors = await getData("minors/"); //gets the minors data
-        console.log("minors", minors);
         setMinorObj(minors);
         const course = await getData("course/"); //gets the minors data
         setCourseObj(course);
-        setMinorObj(minors);
-        console.log(course);
         SetLoadingBar(50); // Set loading bar to 50
         const people = await getData("people/"); //gets the people data
         setPeople(people);
         SetLoadingBar(100); // Set loading bar to 100
         const employment = await getData("employment/"); //gets the employment data
         setEmploymentObj(employment);
-        console.log(employment);
-
         setLoadAbout(true);
       } catch (error) {
         console.error("Error fetching data:", error); //returns an error if something goes wrong
@@ -112,6 +106,7 @@ const App = () => {
             <Sidenav />
           </div>
         </div>
+        {/* passing data down to each section */}
         <section className="w-full gap-4 sm:!gap-7 flex flex-col justify-center">
           <About aboutObj={aboutObj} />
           <hr />

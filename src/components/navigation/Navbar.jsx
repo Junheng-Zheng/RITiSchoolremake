@@ -1,5 +1,6 @@
 import React from "react";
 
+//navbar
 const Navbar = ({ className }) => {
   return (
     <div className={`${className}`}>
@@ -32,8 +33,22 @@ const Navbar = ({ className }) => {
           </p>
         </div>
         <div className="m-0 text-sm font-bold hidden sm:flex gap-4 w-full items-center justify-end">
-          <button>Github</button>
-          <button>LinkedIn</button>
+          <a
+            className="!no-underline !text-black"
+            href="https://github.com/Junheng-Zheng"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Github
+          </a>
+          <a
+            className="!no-underline !text-black"
+            href="https://linkedin.com/in/junhengzheng"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            LinkedIn
+          </a>
         </div>
       </div>
     </div>

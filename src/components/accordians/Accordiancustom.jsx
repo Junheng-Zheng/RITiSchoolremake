@@ -1,6 +1,7 @@
 import React from "react";
 import { useState } from "react";
 
+//custom accordian dropdown
 const AccordianCustom = ({ title, body }) => {
   const [accordionState, setAccordianState] = useState(false);
   return (
@@ -34,9 +35,7 @@ const AccordianCustom = ({ title, body }) => {
         {body.map((p, index) => {
           return (
             <div className="w-full h-fit" key={index}>
-              {/* Add any content you want to render here */}
-              <p className="w-full m-0">{p}</p>{" "}
-              {/* Or customize it as per your data */}
+              <p className="w-full m-0">{p}</p>
             </div>
           );
         })}

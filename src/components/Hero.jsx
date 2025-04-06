@@ -1,5 +1,6 @@
 import React from "react";
 
+//just a hero section for the website
 const Hero = () => {
   return (
     <>

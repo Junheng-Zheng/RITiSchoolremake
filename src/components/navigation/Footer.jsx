@@ -1,5 +1,6 @@
 import React from "react";
 
+//footer
 const Footer = () => {
   return (
     <footer className="flex flex-col w-full bg-black text-white">

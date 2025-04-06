@@ -3,12 +3,14 @@
     https://people.rit.edu/~dsbics/proxy/https://ischool.gccis.rit.edu/api/
 */
 
-const proxyServer = "https://people.rit.edu/~dsbics/proxy/https://ischool.gccis.rit.edu/api/";
+const proxyServer =
+  "https://people.rit.edu/~dsbics/proxy/https://ischool.gccis.rit.edu/api/";
 
+//getting the data
 //endpoint ex: 'about/'
-async function getData(endpoint){
-    const result = await fetch(`${proxyServer}${endpoint}`);
-    return await result.json();
+async function getData(endpoint) {
+  const result = await fetch(`${proxyServer}${endpoint}`);
+  return await result.json();
 }
 
 export default getData;

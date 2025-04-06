@@ -1,9 +1,9 @@
 import React from "react";
-import Graduate from "./graduate";
 import DegreeAcc from "./degreeComponents/DegreeAcc";
 
 //Degrees section
 const Degrees = ({ degreeObj }) => {
+  //my own text, everything from degree api is in degree accordians
   return (
     <div className="w-full gap-4 sm:!gap-7 flex flex-col justify-center">
       <h1 id="degrees">Degrees</h1>

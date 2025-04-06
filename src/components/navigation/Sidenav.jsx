@@ -1,5 +1,6 @@
 import React from "react";
 
+//side navigation
 const Sidenav = () => {
   return (
     <div className="flex-start w-fit hidden sm:flex flex-col gap-4 items-start text-[21px] font-semibold top-0">

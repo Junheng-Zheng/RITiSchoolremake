@@ -1,5 +1,6 @@
 import React from "react";
 
+//custom modal component
 const ModalCustom = ({ currentModelTitle, courseObj, closeModal }) => {
   let course;
   if (courseObj && Array.isArray(courseObj)) {

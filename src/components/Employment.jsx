@@ -1,6 +1,7 @@
 import React from "react";
-import Gridtable from "./Gridtable";
+import Gridtable from "./employmentComponents/Gridtable";
 
+//employment information
 const Employment = ({ employmentObj }) => {
   return (
     <div className="w-full gap-4 sm:!gap-7 flex flex-col justify-center">

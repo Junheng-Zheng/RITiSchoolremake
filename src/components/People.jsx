@@ -1,6 +1,7 @@
 import React from "react";
-import PeopleTabs from "./PeopleTabs";
+import PeopleTabs from "./peopleComponents/PeopleTabs";
 
+//people section
 const People = ({ peopleObj }) => {
   return (
     <div className="w-full gap-4 sm:!gap-5 flex flex-col justify-center">
