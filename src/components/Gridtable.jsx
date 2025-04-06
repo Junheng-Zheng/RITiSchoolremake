@@ -12,11 +12,20 @@ const Gridtable = (data) => {
     pageSize: 8,
   });
 
-  const columns = [
+  console.log(data.data.employmentTable.professionalEmploymentInformation);
+  const coopcolumns = [
     { field: "employer", headerName: "Employer", flex: 1 },
     { field: "degree", headerName: "Degree", flex: 1 },
     { field: "city", headerName: "City", flex: 1 },
     { field: "term", headerName: "Term", flex: 1 },
+  ];
+
+  const employmentcolumns = [
+    { field: "employer", headerName: "Employer", flex: 1 },
+    { field: "degree", headerName: "Degree", flex: 1 },
+    { field: "city", headerName: "City", flex: 1 },
+    { field: "title", headerName: "Title", flex: 1 },
+    { field: "startdate", headerName: "Start Date", flex: 1 },
   ];
 
   useEffect(() => {
@@ -37,7 +46,8 @@ const Gridtable = (data) => {
           employer: p.employer,
           degree: p.degree,
           city: p.city,
-          term: p.term,
+          title: p.title,
+          startdate: p.startDate,
         })
       );
     setProfessionalEmploymentTable([...professionalEmployment]);
@@ -54,7 +64,7 @@ const Gridtable = (data) => {
       <Tab eventKey="cooptable" title="Co-op Table">
         <DataGrid
           rows={row}
-          columns={columns}
+          columns={coopcolumns}
           disableSelectionOnClick
           pagination
           paginationModel={paginationModel}
@@ -82,7 +92,7 @@ const Gridtable = (data) => {
       <Tab eventKey="profemploymenttable" title="Prof. Employment Table">
         <DataGrid
           rows={professionalEmploymentTable}
-          columns={columns}
+          columns={employmentcolumns}
           disableSelectionOnClick
           pagination
           paginationModel={paginationModel}

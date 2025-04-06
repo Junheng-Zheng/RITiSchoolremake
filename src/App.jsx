@@ -22,6 +22,7 @@ const App = () => {
   const [aboutObj, setAboutObj] = useState();
   const [degreeObj, setDegreeObj] = useState();
   const [minorObj, setMinorObj] = useState();
+  const [courseObj, setCourseObj] = useState();
   const [employmentObj, setEmploymentObj] = useState();
   const [people, setPeople] = useState();
   const [loadingBar, SetLoadingBar] = useState(0);
@@ -34,14 +35,21 @@ const App = () => {
         setAboutObj(about);
         const degrees = await getData("degrees/"); //gets the degrees data
         setDegreeObj(degrees);
+        console.log("degrees", degrees);
         const minors = await getData("minors/"); //gets the minors data
+        console.log("minors", minors);
         setMinorObj(minors);
+        const course = await getData("course/"); //gets the minors data
+        setCourseObj(course);
+        setMinorObj(minors);
+        console.log(course);
         SetLoadingBar(50); // Set loading bar to 50
         const people = await getData("people/"); //gets the people data
         setPeople(people);
         SetLoadingBar(100); // Set loading bar to 100
         const employment = await getData("employment/"); //gets the employment data
         setEmploymentObj(employment);
+        console.log(employment);
 
         setLoadAbout(true);
       } catch (error) {
@@ -108,7 +116,7 @@ const App = () => {
           <About aboutObj={aboutObj} />
           <hr />
           <Degrees degreeObj={degreeObj} />
-          <Minors minorObj={minorObj} />
+          <Minors minorObj={minorObj} courseObj={courseObj} />
           <Employment employmentObj={employmentObj} />
           <hr />
           <People peopleObj={people} />

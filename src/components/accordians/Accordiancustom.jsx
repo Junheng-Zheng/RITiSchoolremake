@@ -5,12 +5,14 @@ const AccordianCustom = ({ title, body }) => {
   const [accordionState, setAccordianState] = useState(false);
   return (
     <div
-      onClick={() => setAccordianState(!accordionState)}
       className={`flex hover:bg-gray-50 flex-col transition-all duration-400 ease-in-out border-orange-500 ${
         accordionState && `border-r-10 border-orange-500`
       }`}
     >
-      <div className="border-b border-gray-300 cursor-pointer w-full py-[30px] px-10 flex items-center justify-between">
+      <div
+        onClick={() => setAccordianState(!accordionState)}
+        className="border-b border-gray-300 cursor-pointer w-full py-[30px] px-10 flex items-center justify-between"
+      >
         <p className="m-0 text-xl font-semibold">{title}</p>
         <button
           className={`w-[21px] z-100 h-[21px] transition-all duration-200 ${
