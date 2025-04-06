@@ -23,7 +23,7 @@ export default function PeopleModal({ prop, handleOpen }) {
     <div>
       <p
         onClick={handleOpen}
-        className="cursor-pointer p-0 m-0 py-.5 border-b border-gray-400"
+        className="cursor-pointer bg-gray-100 p-2  rounded-lg m-0 py-.5 border-b border-gray-400"
       >
         View
       </p>

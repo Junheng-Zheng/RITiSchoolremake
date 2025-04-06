@@ -24,7 +24,7 @@ const PeopleGroups = ({ title, pepGroup }) => {
           </div>
         ) : (
           filteredsearch.map((p) => (
-            <div className="cursor-pointer transition-all duration-150 w-full border-b border-gray-300 p-3 h-fit py-2 flex gap-2 hover:rounded-lg items-center hover:!p-5">
+            <div className="transition-all duration-150 w-full border-b border-gray-300 p-3 h-fit py-2 flex gap-2 hover:rounded-lg items-center hover:!p-5">
               <img
                 className="w-[50px] h-[50px] object-cover rounded-full"
                 src={p.imagePath} /*alt={p.name}*/
